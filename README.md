@@ -1,6 +1,6 @@
 # CMake + Fortify
 This project integrates the Fortify C/C++ source analyzer into a CMake build system.
-For the uninitiated, here's the general idea:
+Here's the general idea:
 
 ```text
 # Normal:
@@ -11,7 +11,7 @@ source.cpp -> fortify -> compiler -> source.o
 ```
 
 Fortify acts as a shim between your source code and the compiler.
-This project implements that shim by creating a custom toolchain
+This project implements the shim by creating a custom toolchain
 that's passed to CMake.
 
 ## Getting Started
