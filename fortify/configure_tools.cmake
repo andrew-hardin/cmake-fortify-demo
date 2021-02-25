@@ -35,7 +35,7 @@ endif()
 
 # Configure the toolchain options based on the source analyzer
 # path and the commands listed above.
-set(OUT "${CMAKE_BINARY_DIR}/fortify/wrapped")
+set(OUT "${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/fortify/shim")
 set(FORTIFY_C_WRAPPER ${OUT}/cc)
 set(FORTIFY_CXX_WRAPPER ${OUT}/cxx)
 set(FORTIFY_AR_WRAPPER ${OUT}/ar)
