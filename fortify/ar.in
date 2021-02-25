@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+@FORTIFY_SOURCE_ANALYZER@ -b @FORTIFY_PROJECT_ID@ @FORTIFY_AR@ "$@"
