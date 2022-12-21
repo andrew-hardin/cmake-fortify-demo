@@ -35,17 +35,17 @@ endif()
 
 # Configure the toolchain options based on the source analyzer
 # path and the commands listed above.
-set(OUT "${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/fortify/shim")
-set(FORTIFY_C_WRAPPER ${OUT}/cc)
-set(FORTIFY_CXX_WRAPPER ${OUT}/cxx)
-set(FORTIFY_AR_WRAPPER ${OUT}/ar)
-if(NOT EXISTS ${OUT})
-    file(MAKE_DIRECTORY ${OUT})
-    set(IN "${CMAKE_CURRENT_LIST_DIR}")
-    configure_file(${IN}/ar.in ${FORTIFY_AR_WRAPPER} @ONLY)
-    configure_file(${IN}/cc.in ${FORTIFY_C_WRAPPER} @ONLY)
-    configure_file(${IN}/cxx.in ${FORTIFY_CXX_WRAPPER} @ONLY)
-    configure_file(${IN}/toolchain.cmake.in ${OUT}/toolchain.cmake @ONLY)
+set(FORTIFY_OUT_DIR "${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/fortify/shim")
+set(FORTIFY_C_WRAPPER ${FORTIFY_OUT_DIR}/cc)
+set(FORTIFY_CXX_WRAPPER ${FORTIFY_OUT_DIR}/cxx)
+set(FORTIFY_AR_WRAPPER ${FORTIFY_OUT_DIR}/ar)
+if(NOT EXISTS ${FORTIFY_OUT_DIR})
+    file(MAKE_DIRECTORY ${FORTIFY_OUT_DIR})
+    set(FORTIFY_IN_DIR "${CMAKE_CURRENT_LIST_DIR}")
+    configure_file(${FORTIFY_IN_DIR}/ar.in ${FORTIFY_AR_WRAPPER} @ONLY)
+    configure_file(${FORTIFY_IN_DIR}/cc.in ${FORTIFY_C_WRAPPER} @ONLY)
+    configure_file(${FORTIFY_IN_DIR}/cxx.in ${FORTIFY_CXX_WRAPPER} @ONLY)
+    configure_file(${FORTIFY_IN_DIR}/toolchain.cmake.in ${FORTIFY_OUT_DIR}/toolchain.cmake @ONLY)
 endif()
 
 # Clean up variables set by the CMake includes.
@@ -57,5 +57,5 @@ unset(_CMAKE_TOOLCHAIN_PREFIX)
 
 # This is the critical instruction where we tell CMake to use the
 # custom toolchain that'll point to the Fortify wrapped tools.
-set(CMAKE_TOOLCHAIN_FILE ${OUT}/toolchain.cmake)
+set(CMAKE_TOOLCHAIN_FILE ${FORTIFY_OUT_DIR}/toolchain.cmake)
 message(STATUS "Configuring for Fortify... done.")
